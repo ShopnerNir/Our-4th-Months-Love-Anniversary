@@ -199,7 +199,14 @@
       }
     }
   </style></head>
-<body><div class="stars" id="stars"></div>
+<body><div id="desktopWarning" style="position:fixed; inset:0; background:#020617; z-index:9999; display:none; justify-content:center; align-items:center; padding:20px; text-align:center;">
+  <div style="max-width:500px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); padding:40px 25px; border-radius:28px; backdrop-filter:blur(18px); color:white;">
+    <h1 style="font-size:2rem; margin-bottom:18px;">⚠️ Desktop Mode Required</h1>
+    <p style="line-height:1.9; color:rgba(255,255,255,.82); font-size:1.05rem;">
+      Please turn on <strong>Desktop Site/Desktop Mode</strong> first to view this special anniversary surprise properly. 💻✨
+    </p>
+  </div>
+</div><div class="stars" id="stars"></div>
 <div id="balloons"></div><div class="welcome-screen" id="welcomeScreen">
   <div class="welcome-card">
     <h1>Happy 4th Month ❤️</h1><p>
@@ -274,6 +281,22 @@
     balloon.style.animationDelay=(Math.random()*4)+'s';
     balloons.appendChild(balloon);
   }
+
+  function checkDesktopMode(){
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    const desktopWarning = document.getElementById('desktopWarning');
+
+    if(isMobile && window.innerWidth < 1000){
+      desktopWarning.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }else{
+      desktopWarning.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  checkDesktopMode();
+  window.addEventListener('resize', checkDesktopMode);
 
   function openLetter(){
     document.getElementById('welcomeScreen').classList.add('hidden');
