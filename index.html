@@ -1,109 +1,286 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4th Month Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Hind Siliguri',sans-serif;
+    }
 
-<title>রাখী সরকার + উৎসব সরকার</title>
+    body{
+      min-height:100vh;
+      overflow:hidden;
+      background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+      color:white;
+      position:relative;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@300;400;600&display=swap" rel="stylesheet">
+    .stars{
+      position:fixed;
+      inset:0;
+      z-index:0;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+    .star{
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:white;
+      border-radius:50%;
+      animation:twinkle 4s infinite ease-in-out;
+    }
 
-body{
-  min-height:100vh;
-  font-family:'Noto Serif Bengali', serif;
-  background: radial-gradient(circle at top, #2b2b55, #0f0f1a);
-  background-attachment: fixed;
-  color:#fff;
-}
+    @keyframes twinkle{
+      0%,100%{opacity:.2;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.8)}
+    }
 
-/* wrapper */
-.wrapper{
-  display:flex;
-  justify-content:center;
-}
+    .balloon{
+      position:absolute;
+      bottom:-150px;
+      width:70px;
+      height:90px;
+      border-radius:50%;
+      animation:floatUp linear forwards;
+      opacity:.9;
+    }
 
-/* container */
-.container{
-  width:92%;
-  max-width:750px;
-  padding:30px;
-  margin:60px 0;
+    .balloon::after{
+      content:'';
+      position:absolute;
+      width:2px;
+      height:60px;
+      background:rgba(255,255,255,.5);
+      left:50%;
+      top:90px;
+    }
 
-  border-radius:20px;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.08);
-  box-shadow:0 15px 60px rgba(0,0,0,0.7);
+    @keyframes floatUp{
+      from{
+        transform:translateY(0) rotate(0deg);
+      }
+      to{
+        transform:translateY(-130vh) rotate(15deg);
+      }
+    }
 
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
+    .welcome-screen,
+    .letter-screen{
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:2;
+      padding:20px;
+      transition:1s ease;
+    }
 
-h1{
-  font-size:26px;
-  margin-bottom:15px;
-  color:#ffb6c1;
-}
+    .hidden{
+      opacity:0;
+      pointer-events:none;
+      transform:scale(.9);
+    }
 
-.desc{
-  font-size:15px;
-  margin-bottom:20px;
-  color:#ddd;
-  line-height:1.7;
-}
+    .welcome-card,
+    .letter-card{
+      width:100%;
+      max-width:900px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:30px;
+      padding:50px 35px;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+      animation:fadeIn 1.2s ease;
+    }
 
-input{
-  padding:10px;
-  border-radius:20px;
-  border:none;
-  outline:none;
-  text-align:center;
-  margin-bottom:10px;
-  width:180px;
-}
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
 
-.btn{
-  padding:10px 18px;
-  border:none;
-  border-radius:25px;
-  background:linear-gradient(135deg,#ff4b91,#ff7eb3);
-  color:#fff;
-  cursor:pointer;
-}
+    .welcome-card h1{
+      font-size:3rem;
+      margin-bottom:18px;
+      background:linear-gradient(to right,#fff,#fbcfe8,#dbeafe);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-/* letter */
-.letter{
-  margin-top:25px;
-  text-align:justify;
-  line-height:1.9;
-  font-size:17px;
-  display:none;
+    .welcome-card p{
+      color:rgba(255,255,255,.82);
+      line-height:1.9;
+      font-size:1.15rem;
+    }
 
-  border-left:3px solid #ff9acb;
-  padding-left:15px;
-  white-space:pre-line;
-}
+    .open-btn,
+    .reply-btn{
+      margin-top:35px;
+      border:none;
+      outline:none;
+      padding:15px 28px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      transition:.3s ease;
+      text-decoration:none;
+      display:inline-block;
+    }
 
-/* cursor */
-.cursor{
-  display:inline-block;
-  width:2px;
-  background:#fff;
-  margin-left:3px;
-  animation: blink 1s infinite;
-}
+    .open-btn:hover,
+    .reply-btn:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.2);
+    }
 
-@keyframes blink{
-  0%,50%,100%{opacity:1;}
-  25%,75%{opacity:0;}
-}
+    .letter-title{
+      text-align:center;
+      margin-bottom:20px;
+    }
 
-/* ❤️ quote box */
-.quote-box{
-  margin-top:25px;
+    .letter-title h1{
+      font-size:2.7rem;
+      margin-bottom:10px;
+      background:linear-gradient(to right,#fff,#f9a8d4,#dbeafe);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .letter-title p{
+      color:rgba(255,255,255,.7);
+    }
+
+    .letter{
+      text-align:left;
+      margin-top:30px;
+      line-height:2.1;
+      color:rgba(255,255,255,.92);
+      font-size:1.08rem;
+      white-space:pre-line;
+    }
+
+    .highlight{
+      color:#fda4af;
+      font-weight:700;
+    }
+
+    .signature{
+      margin-top:30px;
+      text-align:right;
+      color:#fbcfe8;
+      font-size:1.1rem;
+      font-weight:600;
+    }
+
+    @media(max-width:768px){
+      .welcome-card,
+      .letter-card{
+        padding:35px 22px;
+      }
+
+      .welcome-card h1,
+      .letter-title h1{
+        font-size:2rem;
+      }
+
+      .letter{
+        font-size:1rem;
+      }
+    }
+  </style></head>
+<body><div class="stars" id="stars"></div>
+<div id="balloons"></div><div class="welcome-screen" id="welcomeScreen">
+  <div class="welcome-card">
+    <h1>Happy 4th Month ❤️</h1><p>
+  অভিনন্দন! ✨<br><br>
+  আজ তোমাদের ভালোবাসার সুন্দর সম্পর্কের
+  <strong>৪ মাস</strong> পূর্ণ হলো। 🌙
+  
+  এই ছোট্ট সময়ের মাঝেই তৈরি হয়েছে অসংখ্য স্মৃতি,
+  হাসি, অভিমান আর ভালোবাসা। ❤️
+  
+  উৎসব তোমার জন্য একটি বিশেষ চিঠি লিখেছে।
+  নিচের বাটনে ক্লিক করে চিঠিটি পড়ো। 💌
+</p>
+
+<button class="open-btn" onclick="openLetter()">
+  💌 চিঠি পড়ুন
+</button>
+
+  </div>
+</div><div class="letter-screen hidden" id="letterScreen">
+  <div class="letter-card"><div class="letter-title">
+  <h1>Happy 4th Month ❤️</h1>
+  <p>চার মাসের ছোট্ট একটা গল্প... কিন্তু আমার কাছে পুরো পৃথিবী।</p>
+</div>
+
+<div class="letter">
+
+প্রিয় ভালোবাসা,
+
+আজ আমাদের সম্পর্কের <span class="highlight">৪ মাস</span> পূর্ণ হলো। সময়টা হয়তো খুব বেশি না, কিন্তু এই অল্প সময়েই তুমি আমার জীবনের সবচেয়ে সুন্দর অভ্যাস হয়ে গেছো। 🌸
+
+তোমার সাথে কথা বলা, তোমার রাগ, তোমার হাসি, তোমার ছোট ছোট অভিমান — সবকিছুই এখন আমার প্রতিদিনের অনুভূতির অংশ। কখন যে তুমি আমার জীবনের এতটা জায়গা নিয়ে নিয়েছো, সেটা আমি নিজেও বুঝিনি।
+
+এই ৪ মাসে আমরা হয়তো অনেক ছোট ছোট মুহূর্ত একসাথে কাটিয়েছি, কিন্তু আমার কাছে প্রতিটা মুহূর্তই খুব মূল্যবান। তোমার সাথে কাটানো সময়গুলো মনে হলে আজও মনটা অদ্ভুত শান্তিতে ভরে যায়। ✨
+
+আমি জানি, সবসময় সবকিছু পারফেক্ট হবে না। হয়তো ঝগড়া হবে, অভিমান হবে, মন খারাপ হবে — কিন্তু একটা জিনিস আমি সবসময় চাই, সেটা হলো তুমি যেন কখনো আমার হাতটা ছেড়ে না দাও।
+
+তুমি আমার জীবনে আসার পর থেকে অনেক কিছু বদলে গেছে। আগের সেই সাধারণ দিনগুলো এখন অনেক সুন্দর লাগে। কারণ এখন প্রতিটা দিনের শেষে তোমাকে ভাবার একটা কারণ আছে। ❤️
+
+ধন্যবাদ আমার জীবনে আসার জন্য। ধন্যবাদ আমাকে এত সুন্দর কিছু অনুভব করানোর জন্য। আর হ্যাঁ… আমি চাই এই ৪ মাস একদিন ৪ বছর হোক, তারপর সারাজীবন। 🌙 </div>
+
+<div class="signature">
+  তোমার মানুষ 💌
+</div>
+
+<a class="reply-btn" href="https://wa.me/8801324309754" target="_blank">
+  💬 জবাব দিন
+</a>
+
+  </div>
+</div><script>
+  const stars = document.getElementById('stars');
+  const balloons = document.getElementById('balloons');
+
+  for(let i=0;i<120;i++){
+    const star=document.createElement('div');
+    star.classList.add('star');
+    star.style.left=Math.random()*100+'vw';
+    star.style.top=Math.random()*100+'vh';
+    star.style.animationDuration=(Math.random()*3+2)+'s';
+    stars.appendChild(star);
+  }
+
+  const colors=['#f472b6','#fb7185','#c084fc','#60a5fa','#facc15'];
+
+  for(let i=0;i<25;i++){
+    const balloon=document.createElement('div');
+    balloon.classList.add('balloon');
+    balloon.style.left=Math.random()*100+'vw';
+    balloon.style.background=colors[Math.floor(Math.random()*colors.length)];
+    balloon.style.animationDuration=(Math.random()*6+6)+'s';
+    balloon.style.animationDelay=(Math.random()*4)+'s';
+    balloons.appendChild(balloon);
+  }
+
+  function openLetter(){
+    document.getElementById('welcomeScreen').classList.add('hidden');
+    document.getElementById('letterScreen').classList.remove('hidden');
+  }
+</script></body>
+</html>  margin-top:25px;
   padding:20px;
   border-radius:15px;
 
